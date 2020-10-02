@@ -1,0 +1,7 @@
+A entrada deverá conter as informações do professor, e a(s) disciplina(s) que ele atua ( no programa a turma será simplesmente um array
+dentro do objeto da Disciplina). Depois, deve-se adicionar as informações da prova, como nome da avaliação ( AP1, AP2, Avaliação 3, etc), 
+número de questões, as questões em si e um peso para a prova.
+
+Creio que se deva armazenar os objetos, podemos nesse caso usar serialização  
+
+ 

@@ -1,6 +1,5 @@
 package BancoDeProvas;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main{
@@ -8,31 +7,28 @@ public class Main{
         Scanner input = new Scanner(System.in);
         boolean continuar = true;
 
+        ConsultarProva consulProvas = new ConsultarProva();
+
         while(continuar){
             System.out.println("");
-
-            int op = 0;
 
             System.out.println("Digite o número da opção escolhida: ");
             System.out.println("1 : Criar Prova");
             System.out.println("2 : Consultar Prova");
             System.out.println("3 : Sair");
-            try{
-                op = input.nextInt();
-            }catch(InputMismatchException ex){
-                System.out.println("Opção digitada é inválida!");
-                input.nextLine();
-                continue;
-            }
+
+            String op = input.nextLine();
+
 
             switch(op){
-                case 1:
-                    System.out.println("Opção Criar Prova");
+                case "1":
+                    CriarProva prova = new CriarProva();
+                    consulProvas.adicionarProva(prova.criarProva());
                     break;
-                case 2:
-                    System.out.println("Opção Consultar Provas!");
+                case "2":
+                    consulProvas.consulta();
                     break;
-                case 3:
+                case "3":
                     continuar = false;
                     break;
                 default:

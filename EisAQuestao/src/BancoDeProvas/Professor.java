@@ -3,21 +3,13 @@ package BancoDeProvas;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Professor implements Serializable {
-    private String nome;
+public class Professor extends Pessoa implements Serializable {
     private String matricula;
 
     public Professor(){
+        super();
         this.nome = "nome";
         this.matricula = "matricula";
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public String getMatricula() {

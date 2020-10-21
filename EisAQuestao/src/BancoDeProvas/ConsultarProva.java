@@ -1,10 +1,10 @@
 package BancoDeProvas;
 
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ConsultarProva {
+public class ConsultarProva implements Write, Read{
     private ArrayList<Prova> provas;
     private ArrayList<Prova> provasAchadas;
 
@@ -47,24 +47,45 @@ public class ConsultarProva {
         }
     }
 
+    @Override
+    public void serialize(String path, Object obj) throws Exception {
+        FileOutputStream fos = new FileOutputStream(path);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+        oos.writeObject(obj);
+
+        oos.close();
+        fos.close();
+    }
+
     public void serializar(){
-
-        Write w = new Write();
-
         try {
-            w.serialize("/home/hsleik/Documents/Programação/Repositories/PPapp/ArquivosSerializados/provas", this.provas);
+            this.serialize("/home/hsleik/Documents/Programação/Repositories/PPapp/ArquivosSerializados/provas", this.provas);
         } catch (Exception ex) {
             System.err.println("Falha ao serializar! - " + ex.toString());
         }
     }
 
-    public void desserializar(){
-        Read r = new Read();
+    @Override
+    public ArrayList<Prova> deserialize(String path) throws Exception{
+        FileInputStream fis = new FileInputStream(path);
+        ObjectInputStream ois = new ObjectInputStream(fis);
 
+        ArrayList<Prova> provas;
+
+        provas  = (ArrayList<Prova>)ois.readObject();
+
+        ois.close();
+        fis.close();
+
+        return provas;
+    }
+
+    public void desserializar(){
         this.provas = null;
 
         try {
-            this.provas = r.deserialize("/home/hsleik/Documents/Programação/Repositories/PPapp/ArquivosSerializados/provas");
+            this.provas = this.deserialize("/home/hsleik/Documents/Programação/Repositories/PPapp/ArquivosSerializados/provas");
         } catch (Exception ex) {
             System.err.println("Falha ao desserializar! - " + ex.toString());
         }

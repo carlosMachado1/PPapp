@@ -1,17 +1,15 @@
 package classes;
 
-public abstract class Pessoa {
+import java.io.Serializable;
+
+public abstract class Pessoa implements Serializable{
 	public String nome;
 
 	public Pessoa() {
 		this.nome = "nome";
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+	public abstract void setNome(String nome);
 
-	public String getNome() {
-		return this.nome;
-	}
+	public abstract String getNome();
 }

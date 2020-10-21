@@ -1,4 +1,4 @@
-package classes;
+package BancoDeProvas;
 
 import java.io.Serializable;
 

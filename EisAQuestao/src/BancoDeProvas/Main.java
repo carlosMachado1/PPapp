@@ -10,8 +10,7 @@ public class Main{
         ConsultarProva consulProvas = new ConsultarProva();
 
         while(continuar){
-            System.out.println("");
-
+            System.out.println("| Início |\n");
             System.out.println("Digite o número da opção escolhida: ");
             System.out.println("1 : Criar Prova");
             System.out.println("2 : Consultar Prova");

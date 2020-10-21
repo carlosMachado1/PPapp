@@ -1,8 +1,8 @@
 package BancoDeProvas;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Questao{
+public class Questao implements Serializable {
     private String tituloQuestao;
     private String alternativaA;
     private String alternativaB;

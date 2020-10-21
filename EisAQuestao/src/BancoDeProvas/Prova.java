@@ -1,8 +1,9 @@
 package BancoDeProvas;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Prova{
+public class Prova implements Serializable{
 
     private Professor professor;
     private Disciplina disciplina;

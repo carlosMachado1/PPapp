@@ -1,5 +1,6 @@
 package BancoDeProvas;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,6 +10,10 @@ public class ConsultarProva {
 
     public ConsultarProva(){
         this.provas = new ArrayList<>();
+
+        if(isPresent()){
+            this.desserializar();
+        }
     }
 
     public void consulta(){
@@ -37,20 +42,53 @@ public class ConsultarProva {
                     continuar = false;
                     break;
                 default:
-                    System.out.println("Opção digitada é inválida!");
+                    System.out.println("Opção digitada é inválida!\n");
             }
-            System.out.println();
         }
     }
 
+    public void serializar(){
+
+        Write w = new Write();
+
+        try {
+            w.serialize("/home/hsleik/Documents/Programação/Repositories/PPapp/ArquivosSerializados/provas", this.provas);
+        } catch (Exception ex) {
+            System.err.println("Falha ao serializar! - " + ex.toString());
+        }
+    }
+
+    public void desserializar(){
+        Read r = new Read();
+
+        this.provas = null;
+
+        try {
+            this.provas = r.deserialize("/home/hsleik/Documents/Programação/Repositories/PPapp/ArquivosSerializados/provas");
+        } catch (Exception ex) {
+            System.err.println("Falha ao desserializar! - " + ex.toString());
+        }
+    }
+
+    public boolean isPresent(){
+        File f = new File("/home/hsleik/Documents/Programação/Repositories/PPapp/ArquivosSerializados/provas");
+        return f.exists() && !f.isDirectory();
+    }
+
     public void adicionarProva(Prova prova){
+        if(isPresent()){
+            this.desserializar();
+        }
+
         this.provas.add(prova);
+
+        this.serializar();
     }
 
     public void pesquisarProva(String op){
         Scanner input = new Scanner(System.in);
 
-        System.out.println("Qual o nome professor que redigiu a prova? ");
+        System.out.println("Qual o nome do professor que redigiu a prova? ");
         String pesqProf = input.nextLine();
         System.out.println();
 
@@ -82,7 +120,7 @@ public class ConsultarProva {
                 this.removerProva();
             }
         }else{
-            System.out.println("Nenhuma prova foi encontrada!");
+            System.out.println("Nenhuma prova foi encontrada!\n");
         }
 
     }
@@ -119,7 +157,7 @@ public class ConsultarProva {
                 System.out.println("D) " + this.provasAchadas.get(i).getQuestoes().get(j).getAlternativaD());
                 System.out.println("E) " + this.provasAchadas.get(i).getQuestoes().get(j).getAlternativaE());
             }
-            System.out.println("Aperte Enter para continuar!");
+            System.out.println("\nAperte Enter para continuar!");
             Scanner input = new Scanner(System.in);
             input.nextLine();
         }
@@ -170,6 +208,10 @@ public class ConsultarProva {
                     System.out.println("Opção digitada é inválida!");
             }
         }
+
+        this.serializar();
+        this.desserializar();
+
         System.out.println();
     }
 }
